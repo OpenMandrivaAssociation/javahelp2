@@ -28,21 +28,14 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-%define oname			javahelp
-%define shversion		2.0
-%define svn_version		2.0.05_svn59
-%define section			free
-
 Name:		javahelp2
-Version:	%{shversion}.05
-Release:	1mdv
+Version:	2.0.05
+Release:	%mkrel 1
 Epoch:		0
 Summary:	JavaHelp
-License:	GNU General Public License - Version 2 with the classpath exception
+License:	GPLv2 with exceptions
 Url:		https://javahelp.dev.java.net/
-Group:		Development/Libraries/Java
-Vendor:		Mandriva
-Distribution:	Mandriva
+Group:		Development/Java
 # 
 #
 Source0:	https://javahelp.dev.java.net/files/documents/5985/59373/%{name}-src-%{version}.zip
@@ -52,6 +45,7 @@ BuildArch:	noarch
 Requires:	jpackage-utils >= 0:1.5.32
 BuildRequires:	jpackage-utils >= 0:1.5.32
 BuildRequires:  jsp >= 0:2.0
+BuildRequires:	java-devel ant
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
