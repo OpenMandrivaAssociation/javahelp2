@@ -45,7 +45,7 @@ BuildArch:	noarch
 Requires:	jpackage-utils >= 0:1.5.32
 BuildRequires:	jpackage-utils >= 0:1.5.32
 BuildRequires:  jsp >= 0:2.0
-BuildRequires:	java-devel ant
+BuildRequires:	java-devel ant ant-nodeps
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
@@ -82,7 +82,7 @@ ln -s %{_javadir}/jsp.jar javahelp_nbproject/lib/jsp-api.jar
 ln -s %{_javadir}/servletapi5.jar javahelp_nbproject/lib/servlet-api.jar
 
 %build
-
+export CLASSPATH=$(build-classpath ant/ant-nodeps)
 ant -f javahelp_nbproject/build.xml -Djdic-jar-present=true -Djdic-zip-present=true -Dservlet-jar-present=true -Dtomcat-zip-present=true release javadoc
 
 %install
