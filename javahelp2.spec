@@ -30,7 +30,7 @@
 
 Name:		javahelp2
 Version:	2.0.05
-Release:	%mkrel 1
+Release:	%mkrel 2
 Epoch:		0
 Summary:	JavaHelp
 License:	GPLv2 with exceptions
@@ -43,7 +43,7 @@ Source1:	%{name}-jhindexer.sh
 Source2:	%{name}-jhsearch.sh
 BuildArch:	noarch
 Requires:	jpackage-utils >= 0:1.5.32
-BuildRequires:	jpackage-utils >= 0:1.5.32
+BuildRequires:	java-rpmbuild >= 0:1.5.32
 BuildRequires:  jsp >= 0:2.0
 BuildRequires:	java-devel >= 1.6.0 ant ant-nodeps
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
