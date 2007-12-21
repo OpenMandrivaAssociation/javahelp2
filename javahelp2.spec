@@ -46,6 +46,7 @@ Requires:	jpackage-utils >= 0:1.5.32
 BuildRequires:	java-rpmbuild >= 0:1.5.32
 BuildRequires:  jsp >= 0:2.0
 BuildRequires:	java-devel >= 1.6.0 ant ant-nodeps
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 JavaHelp software is a full-featured, platform-independent, extensible
