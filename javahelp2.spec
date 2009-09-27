@@ -1,51 +1,23 @@
-# Copyright (c) 2000-2005, JPackage Project
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
-#
-# 1. Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-# 2. Redistributions in binary form must reproduce the above copyright
-#    notice, this list of conditions and the following disclaimer in the
-#    documentation and/or other materials provided with the
-#    distribution.
-# 3. Neither the name of the JPackage Project nor the names of its
-#    contributors may be used to endorse or promote products derived
-#    from this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-
+Summary:	JavaHelp
 Name:		javahelp2
 Version:	2.0.05
 Release:	%mkrel 6
 Epoch:		0
-Summary:	JavaHelp
+Group:		Development/Java
 License:	GPLv2 with exceptions
 Url:		https://javahelp.dev.java.net/
-Group:		Development/Java
-# 
-#
 Source0:	https://javahelp.dev.java.net/files/documents/5985/59373/%{name}-src-%{version}.zip
 Source1:	%{name}-jhindexer.sh
 Source2:	%{name}-jhsearch.sh
 BuildArch:	noarch
 Requires:	jpackage-utils >= 0:1.5.32
 BuildRequires:	java-rpmbuild >= 0:1.5.32
-BuildRequires:  jsp >= 0:2.0
-BuildRequires:	java-devel >= 1.6.0 ant ant-nodeps
+BuildRequires:	jsp >= 0:2.0
+BuildRequires:	xml-commons-jaxp-1.3-apis
+BuildRequires:	tomcat5-servlet-2.4-api
+BuildRequires:	xerces-j2
+BuildRequires:	ant
+BuildRequires:	ant-nodeps
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
@@ -83,26 +55,26 @@ ln -s %{_javadir}/servletapi5.jar javahelp_nbproject/lib/servlet-api.jar
 
 %build
 export CLASSPATH=$(build-classpath ant/ant-nodeps)
-ant -f javahelp_nbproject/build.xml -Djdic-jar-present=true -Djdic-zip-present=true -Dservlet-jar-present=true -Dtomcat-zip-present=true release javadoc
+%ant -f javahelp_nbproject/build.xml -Djdic-jar-present=true -Djdic-zip-present=true -Dservlet-jar-present=true -Dtomcat-zip-present=true release javadoc
 
 %install
-rm -rf $RPM_BUILD_ROOT
-install -d -m 755 $RPM_BUILD_ROOT%{_javadir}
-install -d -m 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-install -d -m 755 $RPM_BUILD_ROOT%{_bindir}
-install -d -m 755 $RPM_BUILD_ROOT%{_datadir}/%{name}
-install -m 755 %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/jh2indexer
-install -m 755 %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}/jh2search
+rm -rf %{buildroot}
+install -d -m 755 %{buildroot}%{_javadir}
+install -d -m 755 %{buildroot}%{_javadocdir}/%{name}-%{version}
+install -d -m 755 %{buildroot}%{_bindir}
+install -d -m 755 %{buildroot}%{_datadir}/%{name}
+install -m 755 %{SOURCE1} %{buildroot}%{_bindir}/jh2indexer
+install -m 755 %{SOURCE2} %{buildroot}%{_bindir}/jh2search
 
-install -m 644 javahelp_nbproject/dist/lib/jhall.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
-#cp -pr jhMaster/JavaHelp/doc/public-spec/dtd $RPM_BUILD_ROOT%{_datadir}/%{name}
-#cp -pr jhMaster/JavaHelp/demos $RPM_BUILD_ROOT%{_datadir}/%{name}
-cp -pr javahelp_nbproject/dist/lib/javadoc/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+install -m 644 javahelp_nbproject/dist/lib/jhall.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
+#cp -pr jhMaster/JavaHelp/doc/public-spec/dtd %{buildroot}%{_datadir}/%{name}
+#cp -pr jhMaster/JavaHelp/demos %{buildroot}%{_datadir}/%{name}
+cp -pr javahelp_nbproject/dist/lib/javadoc/* %{buildroot}%{_javadocdir}/%{name}-%{version}
 # create unversioned symlinks
-(cd $RPM_BUILD_ROOT%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} ${jar/-%{version}/}; done)
+(cd %{buildroot}%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} ${jar/-%{version}/}; done)
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post javadoc
 rm -f %{_javadocdir}/%{name}
@@ -123,4 +95,3 @@ fi
 %files javadoc
 %defattr(0644,root,root,0755)
 %{_javadocdir}/%{name}-%{version}
-
