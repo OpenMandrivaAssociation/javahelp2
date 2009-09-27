@@ -30,7 +30,7 @@
 
 Name:		javahelp2
 Version:	2.0.05
-Release:	%mkrel 5
+Release:	%mkrel 6
 Epoch:		0
 Summary:	JavaHelp
 License:	GPLv2 with exceptions
