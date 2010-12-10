@@ -1,7 +1,7 @@
 Summary:	JavaHelp
 Name:		javahelp2
 Version:	2.0.05
-Release:	%mkrel 6
+Release:	%mkrel 7
 Epoch:		0
 Group:		Development/Java
 License:	GPLv2 with exceptions
