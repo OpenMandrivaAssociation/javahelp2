@@ -17,7 +17,7 @@ BuildRequires:	xml-commons-jaxp-1.3-apis
 BuildRequires:	tomcat5-servlet-2.4-api
 BuildRequires:	xerces-j2
 BuildRequires:	ant
-BuildRequires:	ant-nodeps
+#BuildRequires:	ant-nodeps
 
 %description
 JavaHelp software is a full-featured, platform-independent, extensible
