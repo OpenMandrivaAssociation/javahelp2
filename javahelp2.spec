@@ -31,7 +31,7 @@
 
 Name:		javahelp2
 Version:	2.0.05
-Release:	18
+Release:	19
 Summary:	JavaHelp is a full-featured, platform-independent, extensible help system 
 Group:		Development/Java
 License:	GPLv2 with exceptions
@@ -42,7 +42,7 @@ Source2:	%{name}-jhsearch.sh
 BuildArch:	noarch
 
 BuildRequires:	javapackages-local
-BuildRequires:	java-devel >= 1:1.6.0
+BuildRequires:	java-devel
 
 BuildRequires:	ant
 BuildRequires:	tomcat-servlet-3.0-api
