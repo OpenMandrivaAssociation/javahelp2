@@ -31,7 +31,7 @@
 
 Name:		javahelp2
 Version:	2.0.05
-Release:	19
+Release:	20
 Summary:	JavaHelp is a full-featured, platform-independent, extensible help system 
 Group:		Development/Java
 License:	GPLv2 with exceptions
